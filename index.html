@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message with Character Counter</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var textarea = document.getElementById("message");
+            var counter = document.getElementById("charCount");
+            var warning = document.getElementById("warning");
+            var maxChars = 200;
+
+            textarea.addEventListener("input", function() {
+                var currentLength = textarea.value.length;
+
+                if (currentLength > maxChars) {
+                    textarea.value = textarea.value.substring(0, maxChars);
+                    currentLength = maxChars;
+                    warning.textContent = "You have reached the maximum character limit!";
+                } else {
+                    warning.textContent = "";
+                }
+
+                counter.textContent = `${currentLength}/${maxChars} characters`;
+            });
+        });
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded shadow-md w-full max-w-md">
+        <h1 class="text-xl font-semibold mb-4">Type Your Message</h1>
+        <p class="text-gray-600 mb-2">200 characters max</p>
+        <textarea id="message" 
+                  class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  rows="5" 
+                  placeholder="Type your message..."></textarea>
+        <div class="flex justify-between mt-2 text-sm">
+            <span id="charCount">0/200 characters</span>
+            <span id="warning" class="text-red-500"></span>
+        </div>
+    </div>
+</body>
+</html>
